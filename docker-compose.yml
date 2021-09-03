@@ -1,0 +1,18 @@
+version: "3.9"
+
+services:
+  # Django Server with gunicorn
+  microbiome:
+    image: python:3.9
+    volumes:
+      - .:/app
+    ports:
+      - "8989:8000"
+    command: bash -c "
+      cd /app &&
+      python -m pip install -r requirements.txt &&
+      python manage.py collectstatic --noinput &&
+      python manage.py makemigrations &&
+      python manage.py migrate &&
+      gunicorn microbiome.wsgi -b 0.0.0.0:8000
+      "
