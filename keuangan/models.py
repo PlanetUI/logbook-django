@@ -23,7 +23,11 @@ class CashFlow(models.Model):
 
     def __str__(self) -> str:
         return self.nama_item
-
+    
     class Meta:
         verbose_name = _("Arus Keuangan")
         verbose_name_plural = _("Arus Keuangan")
+
+    @property
+    def harga_total(self):
+        return self.qty * self.harga_satuan
