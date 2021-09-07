@@ -12,7 +12,7 @@ services:
       cd /app &&
       python -m pip install -r requirements.txt &&
       python manage.py collectstatic --noinput &&
-      python manage.py makemigrations --merge &&
+      yes | python manage.py makemigrations --merge &&
       python manage.py migrate &&
       gunicorn logbook.wsgi -b 0.0.0.0:8000
       "
