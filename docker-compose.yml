@@ -2,7 +2,7 @@ version: "3.9"
 
 services:
   # Django Server with gunicorn
-  microbiome:
+  cashflow:
     image: python:3.9
     volumes:
       - .:/app
