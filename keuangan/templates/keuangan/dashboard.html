@@ -7,7 +7,7 @@
     <title>Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
-<body>
+<body class="bg-light">
 
     {% if user.is_authenticated %}
 
@@ -17,9 +17,13 @@
 
     <div class="row justify-content-center">
         {% for cf in cashflow  %}
-        <div class="col-4 col-sm-3 col-lg-2 card p-1 m-1 ">
-            {{ cf.bulan }} <br/>
-            {{ cf.total }}
+        <div class="col-4 col-sm-3 col-lg-2 card p-0 m-1 bg-white">
+            <div class="card-header">
+                {{ cf.bulan }} 
+            </div>
+            <div class="card-body">
+                Rp {{ cf.total }}
+            </div>
         </div>
         {% endfor %}
     </div>
