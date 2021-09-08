@@ -27,6 +27,13 @@
 
     <div class="container">
 
+        <form action="/dashboard" method="get">
+            <div class="input-group p-1 justify-content-end">
+                <input class="input-group-text" type="text" id="tahun" name="tahun" placeholder="Tahun Pengeluaran" required>
+                <button class="btn btn-primary" type="submit">Tampilkan</button>
+            </div>
+        </form>
+
         <div class="card p-1 m-1">
             <canvas id="myChart" style="height: 200px;"></canvas>
         </div>

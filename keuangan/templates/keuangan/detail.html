@@ -34,33 +34,33 @@
         <canvas id="myChart"></canvas>
     </div>
     
-    <table class="table">
-            <tr class="text-white bg-secondary">
-                <td>Tanggal</td>
-                <td>Kategory</td>
-                <td>Produk</td>
-                <td>QTY</td>
-                <td style="text-align: right;">Harga Satuan</td>
-                <td style="text-align: right;">Harga Total</td>
-            </tr>
-            {% for cf in cashflow  %}
-            <tr>
-                <td>{{ cf.tanggal }}</td>
-                <td>{{ cf.kategory }}</td>
-                <td>{{ cf.produk }}</td>
-                <td>{{ cf.qty }}</td>
-                <td style="text-align: right;">Rp {{ cf.harga_satuan }}</td>
-                <td style="text-align: right;">Rp {{ cf.harga_total }}</td>
-            </tr>
-            {% endfor %}
-            <tr class="bg-secondary text-warning">
-                <td>TOTAL</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td style="text-align: right;">Rp {{ total }}</td>
-            </tr>
+    <table class="table table-striped table-hover">
+            <thead>
+                <tr class="text-white bg-secondary">
+                    <th>Tanggal</th>
+                    <th>Kategory</th>
+                    <th>Produk</th>
+                    <th>QTY</th>
+                    <th style="text-align: right;">Harga Satuan</th>
+                    <th style="text-align: right;">Harga Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for cf in cashflow  %}
+                <tr>
+                    <td>{{ cf.tanggal }}</td>
+                    <td>{{ cf.kategory }}</td>
+                    <td>{{ cf.produk }}</td>
+                    <td>{{ cf.qty }}</td>
+                    <td style="text-align: right;">Rp {{ cf.harga_satuan }}</td>
+                    <td style="text-align: right;">Rp {{ cf.harga_total }}</td>
+                </tr>
+                {% endfor %}
+                <tr class="bg-secondary text-white">
+                    <td colspan="5" style="text-align: right;">TOTAL</td>
+                    <td style="text-align: right;">Rp {{ total }}</td>
+                </tr>
+            </tbody>
     </table>
 
     {% else %}
