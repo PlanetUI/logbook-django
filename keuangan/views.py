@@ -128,6 +128,15 @@ def dashboard(request):
         ]
     }
 
+    nama_bulan = []
+    total_bulan = []
+    for bln in context['cashflow']:
+        nama_bulan.append(bln['bulan'])
+        total_bulan.append(bln['total'])
+
+    context['nama_bulan'] = nama_bulan
+    context['total_bulan'] = total_bulan
+
     return render(request, html_template, context)
 
 def detail(request):
