@@ -28,12 +28,12 @@
     <div class="container">
 
         <div class="card p-1 m-1">
-            <canvas id="myChart" width="400" height="100"></canvas>
+            <canvas id="myChart" style="height: 200px;"></canvas>
         </div>
 
         <div class="row justify-content-center">
             {% for cf in cashflow  %}
-            <a class="col-lg-2 card p-0 m-1 bg-white text-decoration-none rounded-3" href="/detail?bulan={{ cf.no }}&tahun={{ year }}">
+            <a class="col-5 col-sm-3 col-md-2 col-lg-2 card p-0 m-1 bg-white text-decoration-none rounded-3" href="/detail?bulan={{ cf.no }}&tahun={{ year }}">
                 <div class="card-body bg-secondary text-light rounded-3">
                     {{ cf.bulan }} 
                 </div>
