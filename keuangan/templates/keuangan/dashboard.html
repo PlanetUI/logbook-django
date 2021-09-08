@@ -12,26 +12,33 @@
     {% if user.is_authenticated %}
 
     <header class="text-center text-white bg-secondary">
-        <p class="p-1">Pengeluaran Bulanan Tahun {{ year }}, <a class="text-warning text-decoration-none" href="/">Home</a></p>
+        <div class="row px-3 pt-3">
+            <div class="col text-start">
+                <a class="text-warning text-decoration-none" href="/">Home</a>
+            </div>
+            <div class="col text-center">
+                <p class="p-1">Pengeluaran Bulanan Tahun {{ year }}</p>
+            </div>
+            <div class="col text-end">
+                <a class="text-warning text-decoration-none" href="{% url 'admin:logout' %}">Logout</a>
+            </div>
+        </div>
     </header>
 
     <div class="container">
 
+        <div class="card p-1 m-1">
+            <canvas id="myChart" width="400" height="100"></canvas>
+        </div>
+
         <div class="row justify-content-center">
             {% for cf in cashflow  %}
-            <a class="col-4 col-sm-3 col-lg-2 card p-0 m-1 bg-white text-decoration-none" href="/detail?bulan={{ cf.no }}&tahun={{ year }}">
-                <div class="card-header text-dark">
+            <a class="col-lg-2 card p-0 m-1 bg-white text-decoration-none rounded-3" href="/detail?bulan={{ cf.no }}&tahun={{ year }}">
+                <div class="card-body bg-secondary text-light rounded-3">
                     {{ cf.bulan }} 
-                </div>
-                <div class="card-body">
-                    Rp {{ cf.total }}
                 </div>
             </a>
             {% endfor %}
-        </div>
-
-        <div class="card p-1 m-1">
-            <canvas id="myChart" width="400" height="100"></canvas>
         </div>
 
     </div>
