@@ -145,8 +145,20 @@ def detail(request):
     cashflow = CashFlow.objects.all().order_by('-tanggal').filter(tanggal__year = request.GET.get('tahun', 2021), tanggal__month = request.GET.get('bulan', 1))
 
     total = 0
+    list_kategori = []
+    total_kategori = []
     for cash in cashflow:
         total += cash.harga_total
+        if str(cash.kategory) not in list_kategori:
+            list_kategori.append(str(cash.kategory))
+            total_kategori.append(0)
+
+    for key, value in enumerate(list_kategori):
+        print(f"{key} {total_kategori[key]} {value}")
+        for cash in cashflow:
+            if value == str(cash.kategory):
+                print(f"{key} {cash.harga_total}")
+                total_kategori[key] += cash.harga_total
 
     bulan = {
         "1": "January",
@@ -167,6 +179,8 @@ def detail(request):
         'year': request.GET.get('tahun', 2021),
         'month': bulan[request.GET.get('bulan', 1)],
         'cashflow': cashflow,
-        'total': total
+        'total': total,
+        'list_kategori': list_kategori,
+        'total_kategori': total_kategori
     }
     return render(request, html_template, context)
