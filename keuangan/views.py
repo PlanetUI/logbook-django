@@ -66,54 +66,98 @@ def dashboard(request):
         'year': request.GET.get('tahun', '2021'),
         'cashflow': [
             {
+                "no": 1,
                 "bulan": "Januari",
                 "total": total_01
             },
             {
+                "no": 2,
                 "bulan": "Februari",
                 "total": total_02
             },
             {
+                "no": 3,
                 "bulan": "Maret",
                 "total": total_03
             },
             {
+                "no": 4,
                 "bulan": "April",
                 "total": total_04
             },
             {
+                "no": 5,
                 "bulan": "Mei",
                 "total": total_05
             },
             {
+                "no": 6,
                 "bulan": "Juni",
                 "total": total_06
             },
             {
+                "no": 7,
                 "bulan": "Juli",
                 "total": total_07
             },
             {
+                "no": 8,
                 "bulan": "Agustus",
                 "total": total_08
             },
             {
+                "no": 9,
                 "bulan": "September",
                 "total": total_09
             },
             {
+                "no": 10,
                 "bulan": "Oktober",
                 "total": total_10
             },
             {
+                "no": 11,
                 "bulan": "November",
                 "total": total_11
             },
             {
+                "no": 12,
                 "bulan": "Desember",
                 "total": total_12
             },
         ]
     }
 
+    return render(request, html_template, context)
+
+def detail(request):
+    html_template = 'keuangan/detail.html'
+    
+    cashflow = CashFlow.objects.all().order_by('-tanggal').filter(tanggal__year = request.GET.get('tahun', 2021), tanggal__month = request.GET.get('bulan', 1))
+
+    total = 0
+    for cash in cashflow:
+        total += cash.harga_total
+
+    bulan = {
+        "1": "January",
+        "2": "February",
+        "3": "Maret",
+        "4": "April",
+        "5": "Mei",
+        "6": "Juni",
+        "7": "Juli",
+        "8": "Agustus",
+        "9": "September",
+        "10": "Oktober",
+        "11": "November",
+        "12": "Desember",
+    }
+
+    context = {
+        'year': request.GET.get('tahun', 2021),
+        'month': bulan[request.GET.get('bulan', 1)],
+        'cashflow': cashflow,
+        'total': total
+    }
     return render(request, html_template, context)
