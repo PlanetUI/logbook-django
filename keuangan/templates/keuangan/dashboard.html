@@ -15,17 +15,21 @@
         <p class="p-1">Pengeluaran Bulanan Tahun {{ year }}, <a class="text-warning text-decoration-none" href="/">Home</a></p>
     </header>
 
-    <div class="row justify-content-center">
-        {% for cf in cashflow  %}
-        <a class="col-4 col-sm-3 col-lg-2 card p-0 m-1 bg-white text-decoration-none" href="/detail?bulan={{ cf.no }}&tahun={{ year }}">
-            <div class="card-header text-dark">
-                {{ cf.bulan }} 
-            </div>
-            <div class="card-body">
-                Rp {{ cf.total }}
-            </div>
-        </a>
-        {% endfor %}
+    <div class="container">
+
+        <div class="row justify-content-center">
+            {% for cf in cashflow  %}
+            <a class="col-4 col-sm-3 col-lg-2 card p-0 m-1 bg-white text-decoration-none" href="/detail?bulan={{ cf.no }}&tahun={{ year }}">
+                <div class="card-header text-dark">
+                    {{ cf.bulan }} 
+                </div>
+                <div class="card-body">
+                    Rp {{ cf.total }}
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+
     </div>
 
     {% endif %}
