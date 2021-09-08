@@ -42,7 +42,18 @@
         </div>
 
     {% else %}
-        Please <a href="/admin">LOGIN!</a>
+    <header class="text-center text-white bg-secondary">
+        <div class="row px-3 pt-3">
+            <div class="col text-start">
+            </div>
+            <div class="col text-center">
+                <p class="p-1">Cash Flow Log Book</p>
+            </div>
+            <div class="col text-end">
+                <a class="text-warning text-decoration-none" href="/admin">LOGIN!</a>
+            </div>
+        </div>
+    </header>
     {% endif %}
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
