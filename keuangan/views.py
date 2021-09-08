@@ -154,10 +154,8 @@ def detail(request):
             total_kategori.append(0)
 
     for key, value in enumerate(list_kategori):
-        print(f"{key} {total_kategori[key]} {value}")
         for cash in cashflow:
             if value == str(cash.kategory):
-                print(f"{key} {cash.harga_total}")
                 total_kategori[key] += cash.harga_total
 
     bulan = {
@@ -177,7 +175,7 @@ def detail(request):
 
     context = {
         'year': request.GET.get('tahun', 2021),
-        'month': bulan[request.GET.get('bulan', 1)],
+        'month': bulan[request.GET.get('bulan', '1')],
         'cashflow': cashflow,
         'total': total,
         'list_kategori': list_kategori,
