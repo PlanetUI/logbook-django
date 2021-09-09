@@ -141,8 +141,27 @@ def dashboard(request):
 
 def detail(request):
     html_template = 'keuangan/detail.html'
+
+    current_month = int(request.GET.get('bulan', 1))
+    current_year = int(request.GET.get('tahun', 2021))
+
+    if current_month == 12:
+        next_year = current_year + 1
+        prev_year = current_year
+        next_month = 1
+        prev_month = current_month - 1
+    elif current_month == 1:
+        next_year = current_year
+        prev_year = current_year - 1
+        next_month = current_month + 1
+        prev_month = 12
+    else:
+        next_year = current_year
+        prev_year = current_year
+        next_month = current_month + 1
+        prev_month = current_month - 1
     
-    cashflow = CashFlow.objects.all().order_by('-tanggal').filter(tanggal__year = request.GET.get('tahun', 2021), tanggal__month = request.GET.get('bulan', 1))
+    cashflow = CashFlow.objects.all().order_by('-tanggal').filter(tanggal__year = request.GET.get('tahun', 2021), tanggal__month = current_month)
 
     total = 0
     list_kategori = []
@@ -174,11 +193,15 @@ def detail(request):
     }
 
     context = {
-        'year': request.GET.get('tahun', 2021),
+        'year': str(current_year),
         'month': bulan[request.GET.get('bulan', '1')],
         'cashflow': cashflow,
         'total': total,
         'list_kategori': list_kategori,
-        'total_kategori': total_kategori
+        'total_kategori': total_kategori,
+        'next_year': str(next_year),
+        'next_month': str(next_month),
+        'prev_year': str(prev_year),
+        'prev_month': str(prev_month),
     }
     return render(request, html_template, context)

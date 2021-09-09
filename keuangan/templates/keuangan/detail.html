@@ -24,6 +24,13 @@
         </div>
     </header>
 
+    <div class="content p-1">
+        <div class="row">
+            <div class="col"><a class="btn btn-secondary" href="/detail?tahun={{ prev_year }}&bulan={{ prev_month }}">Kembali</a></div>
+            <div class="col text-end"><a class="btn btn-secondary" href="/detail?tahun={{ next_year }}&bulan={{ next_month }}">Lanjut</a></div>
+        </div>
+    </div>
+
     {% if list_kategori %}
 
     <div class="wrapper p-1 mt-1 mx-auto mb-1"
