@@ -152,7 +152,7 @@ def save_cashflow(request):
         except:
             obj_category = CashFlowCategory(nama=kategory)
             obj_category.save()
-            
+
         try:
             obj_product = Product.objects.get(nama__exact=product)
         except:
@@ -240,5 +240,6 @@ def detail(request):
         'prev_month': str(prev_month),
         'category': category,
         'product': product,
+        'digit2': [10, 11, 12]
     }
     return render(request, html_template, context)

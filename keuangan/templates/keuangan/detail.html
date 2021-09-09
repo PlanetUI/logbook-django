@@ -72,7 +72,7 @@
                         <input class="input-group-text w-100" type="number" id="satuan" name="satuan" required>
 
                         <label for="tanggal">Tanggal</label>
-                        <input class="input-group-text w-100" type="date" id="tanggal" name="tanggal" value="{{ year }}-{% if current_month != 12 %}0{{ current_month }}{% else %}{{ current_month }}{% endif %}-01" required>
+                        <input class="input-group-text w-100" type="date" id="tanggal" name="tanggal" value="{{ year }}-{% if current_month not in digit2 %}0{{ current_month }}{% else %}{{ current_month }}{% endif %}-01" required>
                     <!-- </div> -->
 
                 </div>
