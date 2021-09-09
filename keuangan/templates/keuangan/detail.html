@@ -27,7 +27,61 @@
     <div class="content p-1">
         <div class="row">
             <div class="col"><a class="btn btn-secondary" href="/detail?tahun={{ prev_year }}&bulan={{ prev_month }}">Kembali</a></div>
+            <div class="col text-center">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Tambah Data
+                </button>
+            </div>
             <div class="col text-end"><a class="btn btn-secondary" href="/detail?tahun={{ next_year }}&bulan={{ next_month }}">Lanjut</a></div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="/detail" method="get">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- <div class="input-group"> -->
+                        <input type="text" name="tahun" value="{{ year }}" hidden>
+                        <input type="text" name="bulan" value="{{ current_month }}" hidden>
+                        <label for="kategory">Kategory</label><br/>
+                        <input class="input-group-text w-100" type="text" id="kategory" name="kategory" list="kategory-list" required>
+                        <datalist id="kategory-list">
+                            {% for kat in category %}
+                                <option>{{ kat.nama }}</option>
+                            {% endfor %}
+                        </datalist>
+
+                        <label for="product">Product</label><br/>
+                        <input class="input-group-text w-100" type="text" id="product" name="product" list="product-list" required>
+                        <datalist id="product-list">
+                            {% for kat in product %}
+                                <option>{{ kat.nama }}</option>
+                            {% endfor %}
+                        </datalist>
+
+                        <label for="qty">QTY</label>
+                        <input class="input-group-text w-100" type="number" id="qty" name="qty" value="1" required>
+
+                        <label for="satuan">Harga Satuan</label>
+                        <input class="input-group-text w-100" type="number" id="satuan" name="satuan" required>
+
+                        <label for="tanggal">Tanggal</label>
+                        <input class="input-group-text w-100" type="date" id="tanggal" name="tanggal" value="{{ year }}-{% if current_month != 12 %}0{{ current_month }}{% else %}{{ current_month }}{% endif %}-01" required>
+                    <!-- </div> -->
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                </div>
+            </form>
+        </div>
         </div>
     </div>
 

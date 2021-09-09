@@ -139,7 +139,21 @@ def dashboard(request):
 
     return render(request, html_template, context)
 
+def save_cashflow(request):
+    kategory = request.GET.get('kategory', '')
+    product = request.GET.get('product', '')
+    qty = request.GET.get('qty', '')
+    satuan = request.GET.get('satuan', '')
+    tanggal = request.GET.get('tanggal', '')
+
+    print(kategory)
+    print(product)
+    print(qty)
+    print(satuan)
+    print(tanggal)
+
 def detail(request):
+    save_cashflow(request)
     html_template = 'keuangan/detail.html'
 
     current_month = int(request.GET.get('bulan', 1))
@@ -192,9 +206,13 @@ def detail(request):
         "12": "Desember",
     }
 
+    category = CashFlowCategory.objects.all()
+    product = Product.objects.all()
+
     context = {
         'year': str(current_year),
         'month': bulan[request.GET.get('bulan', '1')],
+        'current_month': current_month,
         'cashflow': cashflow,
         'total': total,
         'list_kategori': list_kategori,
@@ -203,5 +221,7 @@ def detail(request):
         'next_month': str(next_month),
         'prev_year': str(prev_year),
         'prev_month': str(prev_month),
+        'category': category,
+        'product': product,
     }
     return render(request, html_template, context)
