@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detail</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 </head>
 <body>
     {% if user.is_authenticated %}
@@ -28,7 +29,7 @@
         <div class="row">
             <div class="col"><a class="btn btn-secondary" href="/detail?tahun={{ prev_year }}&bulan={{ prev_month }}">Kembali</a></div>
             <div class="col text-center">
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#cashflowModal">
                     Tambah Data
                 </button>
             </div>
@@ -37,12 +38,12 @@
     </div>
 
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="cashflowModal" tabindex="-1" aria-labelledby="cashflowModalLabel" aria-hidden="true">
         <div class="modal-dialog">
         <div class="modal-content">
             <form action="/detail" method="get">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <h5 class="modal-title" id="cashflowModalLabel">Modal title</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -98,6 +99,7 @@
     <table class="table table-striped table-hover">
             <thead>
                 <tr class="text-white bg-secondary">
+                    <th>Aksi</th>
                     <th>Tanggal</th>
                     <th>Kategory</th>
                     <th>Produk</th>
@@ -108,7 +110,10 @@
             </thead>
             <tbody>
                 {% for cf in cashflow  %}
-                <tr>
+                <tr id="pk{{ cf.pk }}">
+                    <td>
+                        <a href="/edit?id={{ cf.pk }}&tahun={{ year }}&bulan={{ current_month }}&tanggal={{ cf.tanggal|safe }}&kategory={{ cf.kategory }}&produk={{ cf.produk }}&qty={{ cf.qty }}&satuan={{ cf.harga_satuan|safe }}&tanggal={{ cf.tanggal|safe }}" class="btn btn-sm btn-success"><i class="bi-pencil-square"></i></a>
+                    </td>
                     <td>{{ cf.tanggal }}</td>
                     <td>{{ cf.kategory }}</td>
                     <td>{{ cf.produk }}</td>
@@ -118,7 +123,7 @@
                 </tr>
                 {% endfor %}
                 <tr class="bg-secondary text-white">
-                    <td colspan="5" style="text-align: right;">TOTAL</td>
+                    <td colspan="6" style="text-align: right;">TOTAL</td>
                     <td style="text-align: right;">Rp {{ total }}</td>
                 </tr>
             </tbody>

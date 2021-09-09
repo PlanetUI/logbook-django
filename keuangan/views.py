@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import *
 
 # Create your views here.
@@ -169,6 +169,58 @@ def save_cashflow(request):
         )
         obj_cashflow.save()
 
+def edit(request):
+    html_template = 'keuangan/edit.html'
+    category = CashFlowCategory.objects.all()
+    product = Product.objects.all()
+
+    tanggal = str(request.GET.get('tanggal', 0))[0:10]
+
+    context = {
+        'category': category,
+        'product': product,
+        'tanggal': tanggal,
+    }
+    return render(request, html_template, context)
+
+def save(request):
+    o_id = int(request.GET.get('id', 0))
+    kategory = request.GET.get('kategory', '')
+    product = request.GET.get('product', '')
+    qty = request.GET.get('qty', '')
+    satuan = request.GET.get('satuan', '')
+    tanggal = request.GET.get('tanggal', '')
+
+    if (kategory != '') and (product != '') and (qty != '') and (satuan != '') and (tanggal != '') and (o_id != ''):
+        try:
+            obj_category = CashFlowCategory.objects.get(nama__exact=kategory)
+        except:
+            obj_category = CashFlowCategory(nama=kategory)
+            obj_category.save()
+
+        try:
+            obj_product = Product.objects.get(nama__exact=product)
+        except:
+            obj_product = Product(nama=product)
+            obj_product.save()
+
+        object_id = int(request.GET.get('id', 0))
+
+        record = CashFlow.objects.get(pk=object_id)
+        record.kategory = obj_category
+        record.produk = obj_product
+        record.qty = int(qty)
+        record.harga_satuan = float(satuan)
+        record.tanggal = tanggal
+        record.save()
+    return redirect(f"/detail?tahun={request.GET.get('tahun','')}&bulan={request.GET.get('bulan','')}")
+
+def delete(request):
+    object_id = int(request.GET.get('id', 0))
+    record = CashFlow.objects.filter(pk=object_id)
+    record.delete()
+    return redirect(f"/detail?tahun={request.GET.get('tahun','')}&bulan={request.GET.get('bulan','')}")
+
 def detail(request):
     save_cashflow(request)
     html_template = 'keuangan/detail.html'
@@ -192,7 +244,7 @@ def detail(request):
         next_month = current_month + 1
         prev_month = current_month - 1
     
-    cashflow = CashFlow.objects.all().order_by('-tanggal').filter(tanggal__year = request.GET.get('tahun', 2021), tanggal__month = current_month)
+    cashflow = CashFlow.objects.all().order_by('-pk').filter(tanggal__year = request.GET.get('tahun', 2021), tanggal__month = current_month)
 
     total = 0
     list_kategori = []
