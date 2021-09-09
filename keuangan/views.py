@@ -146,11 +146,28 @@ def save_cashflow(request):
     satuan = request.GET.get('satuan', '')
     tanggal = request.GET.get('tanggal', '')
 
-    print(kategory)
-    print(product)
-    print(qty)
-    print(satuan)
-    print(tanggal)
+    if (kategory != '') and (product != '') and (qty != '') and (satuan != '') and (tanggal != ''):
+        try:
+            obj_category = CashFlowCategory.objects.get(nama__exact=kategory)
+        except:
+            obj_category = CashFlowCategory(nama=kategory)
+            obj_category.save()
+            
+        try:
+            obj_product = Product.objects.get(nama__exact=product)
+        except:
+            obj_product = Product(nama=product)
+            obj_product.save()
+
+
+        obj_cashflow = CashFlow(
+            kategory= obj_category,
+            produk=obj_product,
+            qty=int(qty),
+            harga_satuan=float(satuan),
+            tanggal=tanggal
+        )
+        obj_cashflow.save()
 
 def detail(request):
     save_cashflow(request)
