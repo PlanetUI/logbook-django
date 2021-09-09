@@ -112,7 +112,7 @@
                 {% for cf in cashflow  %}
                 <tr id="pk{{ cf.pk }}">
                     <td>
-                        <a href="/edit?id={{ cf.pk }}&tahun={{ year }}&bulan={{ current_month }}&tanggal={{ cf.tanggal|safe }}&kategory={{ cf.kategory }}&produk={{ cf.produk }}&qty={{ cf.qty }}&satuan={{ cf.harga_satuan|safe }}&tanggal={{ cf.tanggal|safe }}" class="btn btn-sm btn-success"><i class="bi-pencil-square"></i></a>
+                        <a href="/edit?id={{ cf.pk|safe }}&tahun={{ year|safe }}&bulan={{ current_month|safe }}&tanggal={{ cf.tanggal|safe }}&kategory={{ cf.kategory|safe }}&produk={{ cf.produk|safe }}&qty={{ cf.qty|safe }}&satuan={{ cf.harga_satuan|safe }}&tanggal={{ cf.tanggal|safe }}" class="btn btn-sm btn-success"><i class="bi-pencil-square"></i></a>
                     </td>
                     <td>{{ cf.tanggal }}</td>
                     <td>{{ cf.kategory }}</td>

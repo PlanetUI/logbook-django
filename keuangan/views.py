@@ -174,12 +174,16 @@ def edit(request):
     category = CashFlowCategory.objects.all()
     product = Product.objects.all()
 
+    object_id = int(request.GET.get('id', 0))
+    record = CashFlow.objects.get(pk=object_id)
+
     tanggal = str(request.GET.get('tanggal', 0))[0:10]
 
     context = {
         'category': category,
         'product': product,
         'tanggal': tanggal,
+        'produk': record.produk
     }
     return render(request, html_template, context)
 

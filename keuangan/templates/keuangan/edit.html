@@ -44,7 +44,7 @@
                     </datalist>
     
                     <label for="product">Product</label><br/>
-                    <input class="input-group-text w-100" type="text" id="product" name="product" list="product-list" value="{{ request.GET.produk }}" required>
+                    <input class="input-group-text w-100" type="text" id="product" name="product" list="product-list" value="{{ produk }}" required>
                     <datalist id="product-list">
                         {% for kat in product %}
                             <option>{{ kat.nama }}</option>
