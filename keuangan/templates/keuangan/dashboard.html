@@ -6,18 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 </head>
 <body class="bg-light">
 
     {% if user.is_authenticated %}
 
-    <header class="text-center text-white bg-secondary">
-        <div class="row px-3 pt-3">
+    <header class="container-fluid text-center border-bottom border-1 text-white bg-secondary">
+        <div class="row p-2">
             <div class="col text-start">
-                <a class="text-warning text-decoration-none" href="/">Home</a>
-            </div>
-            <div class="col text-center">
-                <p class="p-1">Pengeluaran Bulanan Tahun {{ year }}</p>
+                <a class="text-warning" href="/"><i class="bi-columns-gap fw-bold"></i></a>
+                <span class="px-2">Pengeluaran Bulanan Tahun <span class="text-warning">{{ year }}</span></span>
             </div>
             <div class="col text-end">
                 <a class="text-warning text-decoration-none" href="{% url 'admin:logout' %}">Logout</a>
