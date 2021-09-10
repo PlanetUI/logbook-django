@@ -17,8 +17,8 @@
 
 <!-- Body Navigation -->
 {% block body_navigation %}
-<form action="/">
-    
+<form action="/pengeluaran" method="POST">
+    {% csrf_token %}
     <div class="container-fluid bg-white border-bottom pb-3">
         <div class="h3 py-3">
             Data Pengeluaran / Data Baru
@@ -70,7 +70,7 @@
                             <label class="p-sm-2" for="klasifikasi" style="font-size: small;">Kuantitas</label>
                         </div>
                         <div class="col-8 col-lg-10">
-                            <input class="form-control" type="text" name="klasifikasi" id="" required>
+                            <input class="form-control" type="number" name="klasifikasi" id="" required>
                         </div>
                     </div>
 
@@ -79,7 +79,7 @@
                             <label class="p-sm-2" for="klasifikasi" style="font-size: small;">Harga Satuan</label>
                         </div>
                         <div class="col-8 col-lg-10">
-                            <input class="form-control w-100" type="text" name="klasifikasi" id="" required>
+                            <input class="form-control w-100" type="number" name="klasifikasi" id="" required>
                         </div>
                     </div>
 
@@ -88,7 +88,7 @@
                             <label class="p-sm-2" for="klasifikasi" style="font-size: small;">Harga Total</label>
                         </div>
                         <div class="col-8 col-lg-10">
-                            <input class="form-control w-100" type="text" name="klasifikasi" id="" disabled>
+                            <input class="form-control w-100" type="number" name="klasifikasi" id="" disabled>
                         </div>
                     </div>
 
