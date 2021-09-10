@@ -1,12 +1,63 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Category</title>
-</head>
-<body>
-    
-</body>
-</html>
+{% extends "./base.html" %}
+
+<!-- Page Title -->
+{% block title %}
+    Category
+{% endblock %}
+
+{% block navbar_title_menu %}
+<a href="/category" class="px-3 text-decoration-none">
+    Category
+</a>
+{% endblock %}
+
+<!-- Custom CSS -->
+{% block custom_css %}
+
+{% endblock %}
+
+<!-- Menu Root -->
+{% block navbar_root_menu %}
+    <!-- <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="/pemasukan">Pemasukan</a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="/pengeluaran">Pengeluaran</a>
+    </li> -->
+{% endblock %}
+
+<!-- Body Navigation -->
+{% block body_navigation %}
+<div class="container-fluid bg-white border-bottom pb-3">
+    <div class="h3 py-3">
+        Data Category
+    </div>
+    <div class="container-fluid px-0">
+        <div class="row">
+            <div class="col-5">
+                <a href="/category_form" class="btn btn-sm btn-primary">CREATE</a>
+                <a href="#" class="btn btn-sm btn-light border">EXPORT</a>
+            </div>
+            <div class="col-7 text-end d-none d-sm-block">
+                <span class="btn btn-sm bg-light border ">Halaman: 1</span>
+                <a href="#" class="btn btn-sm btn-light border"><i class="bi-arrow-left"></i></a>
+                <a href="#" class="btn btn-sm btn-light border"><i class="bi-arrow-right"></i></a>
+                <a href="#" class="btn btn-sm btn-light border"><i class="bi-list"></i></a>
+                <a href="#" class="btn btn-sm btn-light border"><i class="bi-speedometer"></i></a>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+<!-- Body -->
+{% block custom_body %}
+
+{% endblock %}
+
+<!-- Custom JS -->
+{% block custom_js %}
+
+{% endblock %}

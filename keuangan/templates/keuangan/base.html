@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+
+    <!-- bootstrap -->
+    <link href="/static/keuangan/bootstrap-5.1.1-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/keuangan/bootstrap-icons-1.5.0/bootstrap-icons.css" rel="stylesheet">
+
+    {% block custom_css %}{% endblock %}
+</head>
+<body class="bg-light">
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+        <div class="container-fluid">
+            <span class="navbar-brand" href="/"><a href="/" class="bi-columns-gap"></a>
+                {% block navbar_title_menu %}{% endblock %}
+            </span>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    {% block navbar_root_menu %}{% endblock %}
+                </ul>
+    
+                <div class="nav-item dropdown">
+                    {% if user.is_authenticated %}
+                    <a class="nav-link dropdown-toggle text-end" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        {{ user.username }}
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="/profile.html"><i class="bi-person"></i> Profile</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="{% url 'admin:logout' %}"><i class="bi-box-arrow-right"></i> Logout</a></li>
+                    </ul>
+                    {% else %}
+                    <a class="nav-link text-end" href="/admin">
+                        <i class="bi-lock"></i> Login
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+    
+        </div>
+    </nav>
+    
+    {% block body_navigation %}{% endblock %}
+
+    {% block custom_body %}{% endblock %}
+
+    <!-- bootstrap -->
+    <script src="/static/keuangan/bootstrap-5.1.1-dist/js/bootstrap.bundle.js"></script>
+    {% block custom_js %}{% endblock %}
+</body>
+</html>

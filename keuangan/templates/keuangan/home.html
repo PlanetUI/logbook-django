@@ -1,0 +1,42 @@
+{% extends "./base.html" %}
+
+<!-- Page Title -->
+{% block title %}
+    ArusKas
+{% endblock %}
+
+{% block navbar_title_menu %}
+<a href="/" class="px-3 text-decoration-none">
+    ArusKas
+</a>
+{% endblock %}
+
+<!-- Custom CSS -->
+{% block custom_css %}{% endblock %}
+
+<!-- Body -->
+{% block custom_body %}
+    {% if user.is_authenticated %}
+        <div class="container overflow-hidden">
+            <div class="row gy-lg-3">
+
+                <a class="col-3 btn btn-light p-1" href="/dash">
+                    <div class="py-2 border bg-white"><i class="bi-speedometer2 h1"></i><br/><span style="font-size: small;">Dash</span></div>
+                </a>
+                <a class="col-3 btn btn-light p-1" href="/category">
+                    <div class="py-2 border bg-white"><i class="bi-tag h1"></i><br/><span style="font-size: small;">Category</span></div>
+                </a>
+                <a class="col-3 btn btn-light p-1" href="/product">
+                    <div class="py-2 border bg-white"><i class="bi-box h1"></i><br/><span style="font-size: small;">Product</span></div>
+                </a>
+                <a class="col-3 btn btn-light p-1" href="/settings">
+                    <div class="py-2 border bg-white"><i class="bi-gear h1"></i><br/><span style="font-size: small;">Setting</span></div>
+                </a>
+
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
+
+<!-- Custom JS -->
+{% block custom_js %}{% endblock %}

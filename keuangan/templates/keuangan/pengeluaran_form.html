@@ -1,0 +1,109 @@
+{% extends "./dash.html" %}
+
+<!-- Page Title -->
+{% block title %}
+    Dashboard | Pengeluaran
+{% endblock %}
+
+<!-- {% block navbar_title %}
+    Dashboard
+{% endblock %} -->
+
+<!-- Custom CSS -->
+<!-- {% block custom_css %}{% endblock %} -->
+
+<!-- Menu Root -->
+<!-- {% block root_menu %}{% endblock %} -->
+
+<!-- Body Navigation -->
+{% block body_navigation %}
+<form action="/">
+    
+    <div class="container-fluid bg-white border-bottom pb-3">
+        <div class="h3 py-3">
+            Data Pengeluaran / Data Baru
+        </div>
+        <div>
+            <button type="submit" href="#" class="btn btn-sm btn-primary">SIMPAN</button>
+            <a href="/pengeluaran" class="btn btn-sm btn-light border">BATAL</a>
+            <a href="#" class="btn btn-sm btn-light border" id="menuSettings" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi-gear"></i></a>
+            <ul class="dropdown-menu" aria-labelledby="menuSettings">
+                <li><a class="dropdown-item" href="#"><i class="bi-trash text-danger"></i> Hapus</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="container mt-2">
+        <div class="card">
+            <div class="card-body">
+                <div class="container">
+
+                    <div class="row my-1">
+                        <div class="col-4 col-lg-2">
+                            <label class="p-sm-2" for="klasifikasi" style="font-size: small;">Tanggal</label>
+                        </div>
+                        <div class="col-8 col-lg-10">
+                            <input class="form-control" type="date" name="tanggal" id="" required>
+                        </div>
+                    </div>
+
+                    <div class="row my-1">
+                        <div class="col-4 col-lg-2">
+                            <label class="p-sm-2" for="klasifikasi" style="font-size: small;">Klasifikasi</label>
+                        </div>
+                        <div class="col-8 col-lg-10">
+                            <input class="form-control" type="text" name="klasifikasi" id="" required>
+                        </div>
+                    </div>
+
+                    <div class="row my-1">
+                        <div class="col-4 col-lg-2">
+                            <label class="p-sm-2" for="klasifikasi" style="font-size: small;">Produk</label>
+                        </div>
+                        <div class="col-8 col-lg-10">
+                            <input class="form-control" type="text" name="klasifikasi" id="" required>
+                        </div>
+                    </div>
+
+                    <div class="row my-1">
+                        <div class="col-4 col-lg-2">
+                            <label class="p-sm-2" for="klasifikasi" style="font-size: small;">Kuantitas</label>
+                        </div>
+                        <div class="col-8 col-lg-10">
+                            <input class="form-control" type="text" name="klasifikasi" id="" required>
+                        </div>
+                    </div>
+
+                    <div class="row my-1">
+                        <div class="col-4 col-lg-2">
+                            <label class="p-sm-2" for="klasifikasi" style="font-size: small;">Harga Satuan</label>
+                        </div>
+                        <div class="col-8 col-lg-10">
+                            <input class="form-control w-100" type="text" name="klasifikasi" id="" required>
+                        </div>
+                    </div>
+
+                    <div class="row my-1">
+                        <div class="col-4 col-lg-2">
+                            <label class="p-sm-2" for="klasifikasi" style="font-size: small;">Harga Total</label>
+                        </div>
+                        <div class="col-8 col-lg-10">
+                            <input class="form-control w-100" type="text" name="klasifikasi" id="" disabled>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>
+{% endblock %}
+
+<!-- Body -->
+{% block custom_body %}
+    
+{% endblock %}
+
+<!-- Custom JS -->
+<!-- {% block custom_js %}{% endblock %} -->

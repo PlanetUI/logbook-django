@@ -7,9 +7,20 @@ from .views.detail import detail
 from .views.edit import edit, delete, save
 from .views.category import category
 from .views.product import product
+from .views.home import home
+from .views.dash import dash
+from .views.pengeluaran import pengeluaran
+from .views.pengeluaran_form import pengeluaran_form
+from .views.pemasukan import pemasukan
 
 urlpatterns = [
-    path('', index),
+    path('', home),
+    path('dash', dash),
+    path('pengeluaran', pengeluaran),
+    path('pengeluaran_form', pengeluaran_form),
+    path('pemasukan', pemasukan),
+
+    path('home', index),
     path('dashboard', dashboard),
     path('detail', detail),
     path('edit', edit),
