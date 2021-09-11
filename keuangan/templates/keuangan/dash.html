@@ -112,7 +112,7 @@
 
 <script>
     const pengeluaranChartlabels = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
-    const pengeluaranChartdatas = [200, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100];
+    const pengeluaranChartdatas = {{ cashflowOutList }};
     var pengeluaranChartctx = document.getElementById('pengeluaranChart').getContext('2d');
     var pengeluaranChart = new Chart(pengeluaranChartctx, {
         type: 'bar',
@@ -142,7 +142,7 @@
 
 <script>
     const pemasukanChartlabels = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
-    const pemasukanChartdatas = [200, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100];
+    const pemasukanChartdatas = {{ cashflowInList }};
     var pemasukanChartctx = document.getElementById('pemasukanChart').getContext('2d');
     var pemasukanChart = new Chart(pemasukanChartctx, {
         type: 'bar',
