@@ -34,10 +34,140 @@
 
 <!-- Body -->
 {% block custom_body %}
+    <div class="container">
 
+        <div class="card m-1">
+            <div class="card-body p-0 bg-secondary">
+                <div class="row px-1">
+                    <a href="/dash?tahun={{ prevYear|safe }}" class="col text-start py-1"><i class="btn btn-sm btn-secondary bi-arrow-left"></i></a>
+                    <div class="col text-center pt-2 h5 fw-bold text-white">{{ thisYear|safe }}</div>
+                    <a href="/dash?tahun={{ nextYear|safe }}" class="col text-end py-1"><i class="btn btn-sm btn-secondary bi-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="card m-1">
+            <div class="card-header fw-bolder">
+                Pengeluaran
+            </div>
+            <div class="card-body">
+                
+                <div class="card p-1 m-1">
+                    <canvas id="pengeluaranChart" style="height: 200px;"></canvas>
+                </div>
+
+            </div>
+            <div class="card-footer">
+                <div class="row g-1 p-1">
+                    <span class="col px-1"><a href="/pengeluaran?tahun={{ thisYear|safe }}&bulan=1" class="btn btn-sm btn-secondary d-block">January</a></span>
+                    <span class="col px-1"><a href="/pengeluaran?tahun={{ thisYear|safe }}&bulan=2" class="btn btn-sm btn-secondary d-block">February</a></span>
+                    <span class="col px-1"><a href="/pengeluaran?tahun={{ thisYear|safe }}&bulan=3" class="btn btn-sm btn-secondary d-block">Maret</a></span>
+                    <span class="col px-1"><a href="/pengeluaran?tahun={{ thisYear|safe }}&bulan=4" class="btn btn-sm btn-secondary d-block">April</a></span>
+                    <span class="col px-1"><a href="/pengeluaran?tahun={{ thisYear|safe }}&bulan=5" class="btn btn-sm btn-secondary d-block">Mei</a></span>
+                    <span class="col px-1"><a href="/pengeluaran?tahun={{ thisYear|safe }}&bulan=6" class="btn btn-sm btn-secondary d-block">Juni</a></span>
+                    <span class="col px-1"><a href="/pengeluaran?tahun={{ thisYear|safe }}&bulan=7" class="btn btn-sm btn-secondary d-block">Juli</a></span>
+                    <span class="col px-1"><a href="/pengeluaran?tahun={{ thisYear|safe }}&bulan=8" class="btn btn-sm btn-secondary d-block">Agustur</a></span>
+                    <span class="col px-1"><a href="/pengeluaran?tahun={{ thisYear|safe }}&bulan=9" class="btn btn-sm btn-secondary d-block">September</a></span>
+                    <span class="col px-1"><a href="/pengeluaran?tahun={{ thisYear|safe }}&bulan=10" class="btn btn-sm btn-secondary d-block">Oktober</a></span>
+                    <span class="col px-1"><a href="/pengeluaran?tahun={{ thisYear|safe }}&bulan=11" class="btn btn-sm btn-secondary d-block">November</a></span>
+                    <span class="col px-1"><a href="/pengeluaran?tahun={{ thisYear|safe }}&bulan=12" class="btn btn-sm btn-secondary d-block">Desember</a></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="card m-1">
+            <div class="card-header fw-bolder">
+                Pemasukan
+            </div>
+            <div class="card-body">
+                
+                <div class="card p-1 m-1">
+                    <canvas id="pemasukanChart" style="height: 200px;"></canvas>
+                </div>
+
+            </div>
+            <div class="card-footer">
+                <div class="row g-1 p-1">
+                    <span class="col px-1"><a href="/pemasukan?tahun={{ thisYear|safe }}&bulan=1" class="btn btn-sm btn-secondary d-block">January</a></span>
+                    <span class="col px-1"><a href="/pemasukan?tahun={{ thisYear|safe }}&bulan=2" class="btn btn-sm btn-secondary d-block">February</a></span>
+                    <span class="col px-1"><a href="/pemasukan?tahun={{ thisYear|safe }}&bulan=3" class="btn btn-sm btn-secondary d-block">Maret</a></span>
+                    <span class="col px-1"><a href="/pemasukan?tahun={{ thisYear|safe }}&bulan=4" class="btn btn-sm btn-secondary d-block">April</a></span>
+                    <span class="col px-1"><a href="/pemasukan?tahun={{ thisYear|safe }}&bulan=5" class="btn btn-sm btn-secondary d-block">Mei</a></span>
+                    <span class="col px-1"><a href="/pemasukan?tahun={{ thisYear|safe }}&bulan=6" class="btn btn-sm btn-secondary d-block">Juni</a></span>
+                    <span class="col px-1"><a href="/pemasukan?tahun={{ thisYear|safe }}&bulan=7" class="btn btn-sm btn-secondary d-block">Juli</a></span>
+                    <span class="col px-1"><a href="/pemasukan?tahun={{ thisYear|safe }}&bulan=8" class="btn btn-sm btn-secondary d-block">Agustur</a></span>
+                    <span class="col px-1"><a href="/pemasukan?tahun={{ thisYear|safe }}&bulan=9" class="btn btn-sm btn-secondary d-block">September</a></span>
+                    <span class="col px-1"><a href="/pemasukan?tahun={{ thisYear|safe }}&bulan=10" class="btn btn-sm btn-secondary d-block">Oktober</a></span>
+                    <span class="col px-1"><a href="/pemasukan?tahun={{ thisYear|safe }}&bulan=11" class="btn btn-sm btn-secondary d-block">November</a></span>
+                    <span class="col px-1"><a href="/pemasukan?tahun={{ thisYear|safe }}&bulan=12" class="btn btn-sm btn-secondary d-block">Desember</a></span>
+                </div>
+            </div>
+        </div>
+
+    </div>
 {% endblock %}
 
 <!-- Custom JS -->
 {% block custom_js %}
+
+<script>
+    const pengeluaranChartlabels = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+    const pengeluaranChartdatas = [200, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100];
+    var pengeluaranChartctx = document.getElementById('pengeluaranChart').getContext('2d');
+    var pengeluaranChart = new Chart(pengeluaranChartctx, {
+        type: 'bar',
+        data: {
+            labels: pengeluaranChartlabels,
+            datasets: [{
+                label: `Pengeluaran Bulanan Tahun {{ thisYear|safe }}`,
+                data: pengeluaranChartdatas,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
+
+<script>
+    const pemasukanChartlabels = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+    const pemasukanChartdatas = [200, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100];
+    var pemasukanChartctx = document.getElementById('pemasukanChart').getContext('2d');
+    var pemasukanChart = new Chart(pemasukanChartctx, {
+        type: 'bar',
+        data: {
+            labels: pemasukanChartlabels,
+            datasets: [{
+                label: `Pemasukan Bulanan Tahun {{ thisYear|safe }}`,
+                data: pemasukanChartdatas,
+                backgroundColor: [
+                    'rgba(75, 192, 192, 0.2)',
+                ],
+                borderColor: [
+                    'rgba(75, 192, 192, 1)',
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
 
 {% endblock %}
