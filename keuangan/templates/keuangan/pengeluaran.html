@@ -46,7 +46,7 @@
 
 <!-- Body -->
 {% block custom_body %}
-    {% if getView == 'tree' %}
+    {% if getView == 'tree' and data.total %}
     <div id="tree_view" class="container-fluid overflow-auto px-0">
         <table class="table table-striped table-hover">
             <thead>
@@ -113,6 +113,13 @@
 
     </div>
 
+    {% else %}
+    <div class="container-fluid">
+        <div class="text-center py-5">
+            <img src="/static/keuangan/3047123.png" alt="" style="width: 500px;"> <br>
+            <span class="h1 fw-bolder font-monospace">Belum ada Data</span>
+        </div>
+    </div>
     {% endif %}
 
 {% endblock %}
