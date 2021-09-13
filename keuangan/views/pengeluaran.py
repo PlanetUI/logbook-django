@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
+from datetime import datetime
 from ..models import CashFlow
 
 
-def monthString(number=1):
+def monthString(number=datetime.now().month):
     data = {
         1: 'Januari',
         2: 'February',
@@ -19,7 +20,7 @@ def monthString(number=1):
     }
     return data[number]
 
-def getCashFlow(tahun=2021, bulan=1):
+def getCashFlow(tahun=datetime.now().year, bulan=datetime.now().month):
     cashFlow = CashFlow.objects.all().order_by('-pk').filter(tanggal__year = tahun, tanggal__month = bulan)
 
     total = 0
@@ -58,8 +59,8 @@ def getCashFlow(tahun=2021, bulan=1):
 def pengeluaran(request):
     html_template = 'keuangan/pengeluaran.html'
 
-    getYear = int(request.GET.get('tahun', 2021))
-    getMonth = int(request.GET.get('bulan', 1))
+    getYear = int(request.GET.get('tahun', datetime.now().year))
+    getMonth = int(request.GET.get('bulan', datetime.now().month))
     getView = str(request.GET.get('view', 'tree'))
 
     if getMonth == 1:
@@ -87,6 +88,7 @@ def pengeluaran(request):
         'nextYear': nextYear,
         'nextMonth': nextMonth,
         'getView': getView,
-        'data': getCashFlow(getYear, getMonth)
+        'data': getCashFlow(getYear, getMonth),
+        'thisDate': f"{getYear}-{str(getMonth).zfill(2)}-{str(datetime.now().day).zfill(2)}"
     }
     return render(request, html_template, context)

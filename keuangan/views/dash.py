@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect
+from datetime import datetime
 from ..models import CashFlow
 
 def dash(request):
     html_template = 'keuangan/dash.html'
 
-    getyear = int(request.GET.get('tahun', 2021))
+    getyear = int(request.GET.get('tahun', datetime.now().year))
 
     cashflow = CashFlow.objects.all().order_by('-tanggal').filter(tanggal__year = getyear)
     i = 1

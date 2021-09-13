@@ -43,7 +43,7 @@
                             <label class="p-sm-2" for="klasifikasi" style="font-size: small;">Tanggal</label>
                         </div>
                         <div class="col-8 col-lg-10">
-                            <input class="form-control" type="date" name="tanggal" id="tanggal" value="{% if record %}{{ record.tanggal|safe }}{% endif %}" required>
+                            <input class="form-control" type="date" name="tanggal" id="tanggal" value="{% if record %}{{ record.tanggal|safe }}{% else %}{{ thisDate|safe }}{% endif %}" required>
                         </div>
                     </div>
 
