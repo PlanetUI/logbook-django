@@ -40,7 +40,10 @@ def getCashFlow(tahun=2021, bulan=1):
         for cash in cashFlow:
             if value == str(cash.kategory):
                 total_kategori[key] += cash.harga_total
-            if value == str(cash.kategory):
+                
+    for key, value in enumerate(list_product):
+        for cash in cashFlow:
+            if value == str(cash.produk):
                 total_product[key] += cash.harga_total
     return {
         'total': total,
