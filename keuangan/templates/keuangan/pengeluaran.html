@@ -27,7 +27,7 @@
     <div class="container-fluid px-0">
         <div class="row">
             <div class="col col-lg-5">
-                <a href="/pengeluaran_form" class="btn btn-sm btn-primary">CREATE</a>
+                <a href="/pengeluaran_form?tahun={{ thisYear|safe }}&bulan={{ thisMonth|safe }}" class="btn btn-sm btn-primary">CREATE</a>
                 <a href="#" class="btn btn-sm btn-light border">EXPORT</a>
 
             </div>
@@ -63,7 +63,7 @@
             <tbody>
                 {% for dcf in data.cashFlow %}
                 <tr>
-                    <th><a href="/pengeluaran_form?id={{ dcf.id }}" class="btn btn-sm"><i class="bi-pencil-fill text-success"></i></a></th>
+                    <th><a href="/pengeluaran_form?id={{ dcf.id }}&tahun={{ thisYear|safe }}&bulan={{ thisMonth|safe }}" class="btn btn-sm"><i class="bi-pencil-fill text-success"></i></a></th>
                     <td>{{ dcf.tanggal }}</td>
                     <td>{{ dcf.kategory }}</td>
                     <td>{{ dcf.produk }}</td>
