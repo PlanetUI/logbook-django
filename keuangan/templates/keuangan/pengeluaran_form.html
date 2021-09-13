@@ -21,15 +21,17 @@
     {% csrf_token %}
     <div class="container-fluid bg-white border-bottom pb-3">
         <div class="h3 py-3">
-            Data Pengeluaran / Data Baru
+            Data Pengeluaran / {% if record %}{{ record.produk|safe }}{% else %}Data Baru{% endif %}
         </div>
         <div>
             <button type="submit" href="#" class="btn btn-sm btn-primary">SIMPAN</button>
             <a href="/pengeluaran?tahun={{ thisYear|safe }}&bulan={{ thisMonth|safe }}" class="btn btn-sm btn-light border">BATAL</a>
+            {% if record %}
             <a href="#" class="btn btn-sm btn-light border" id="menuSettings" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi-gear"></i></a>
             <ul class="dropdown-menu" aria-labelledby="menuSettings">
                 <li><a class="dropdown-item" href="#"><i class="bi-trash text-danger"></i> Hapus</a></li>
             </ul>
+            {% endif %}
         </div>
     </div>
 
