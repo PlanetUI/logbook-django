@@ -17,7 +17,7 @@
 
 <!-- Body Navigation -->
 {% block body_navigation %}
-<form action="/pengeluaran" method="POST">
+<form action="/pengeluaran_form" method="POST">
     {% csrf_token %}
     <div class="container-fluid bg-white border-bottom pb-3">
         <div class="h3 py-3">
@@ -29,7 +29,7 @@
             {% if record %}
             <a href="#" class="btn btn-sm btn-light border" id="menuSettings" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi-gear"></i></a>
             <ul class="dropdown-menu" aria-labelledby="menuSettings">
-                <li><a class="dropdown-item" href="#"><i class="bi-trash text-danger"></i> Hapus</a></li>
+                <li><button class="dropdown-item" onclick="deleteData({{ record.id|safe }})"><i class="bi-trash text-danger"></i> Hapus</button></li>
             </ul>
             {% endif %}
         </div>
@@ -40,9 +40,13 @@
             <div class="card-body">
                 <div class="container">
 
+                    <input type="text" name="tahun" value="{{ thisYear|safe }}" hidden>
+                    <input type="text" name="bulan" value="{{ thisMonth|safe }}" hidden>
+                    <input type="number" name="id" value="{{ record.id|safe }}" hidden>
+
                     <div class="row my-1">
                         <div class="col-4 col-lg-2">
-                            <label class="p-sm-2" for="klasifikasi" style="font-size: small;">Tanggal</label>
+                            <label class="p-sm-2" for="tanggal" style="font-size: small;">Tanggal</label>
                         </div>
                         <div class="col-8 col-lg-10">
                             <input class="form-control" type="date" name="tanggal" id="tanggal" value="{% if record %}{{ record.tanggal|safe }}{% else %}{{ thisDate|safe }}{% endif %}" required>
@@ -54,43 +58,53 @@
                             <label class="p-sm-2" for="klasifikasi" style="font-size: small;">Klasifikasi</label>
                         </div>
                         <div class="col-8 col-lg-10">
-                            <input class="form-control" type="text" name="klasifikasi" id="klasifikasi" value="{% if record %}{{ record.kategory|safe }}{% endif %}" required>
+                            <input class="form-control" type="text" name="klasifikasi" id="klasifikasi" value="{% if record %}{{ record.kategory|safe }}{% endif %}" list="kategory-list" required>
+                            <datalist id="kategory-list">
+                                {% for kat in category %}
+                                    <option>{{ kat.nama }}</option>
+                                {% endfor %}
+                            </datalist>
                         </div>
                     </div>
 
                     <div class="row my-1">
                         <div class="col-4 col-lg-2">
-                            <label class="p-sm-2" for="klasifikasi" style="font-size: small;">Produk</label>
+                            <label class="p-sm-2" for="produk" style="font-size: small;">Produk</label>
                         </div>
                         <div class="col-8 col-lg-10">
-                            <input class="form-control" type="text" name="klasifikasi" id="produk" value="{% if record %}{{ record.produk|safe }}{% endif %}" required>
+                            <input class="form-control" type="text" name="produk" id="produk" value="{% if record %}{{ record.produk|safe }}{% endif %}" list="product-list" required>
+                            <datalist id="product-list">
+                                {% for kat in product %}
+                                    <option>{{ kat.nama }}</option>
+                                {% endfor %}
+                            </datalist>
                         </div>
                     </div>
 
                     <div class="row my-1">
                         <div class="col-4 col-lg-2">
-                            <label class="p-sm-2" for="klasifikasi" style="font-size: small;">Kuantitas</label>
+                            <label class="p-sm-2" for="qty" style="font-size: small;">Kuantitas</label>
                         </div>
                         <div class="col-8 col-lg-10">
-                            <input class="form-control" type="number" name="klasifikasi" id="qty" value="{% if record %}{{ record.qty|safe }}{% endif %}" required>
+                            <input class="form-control" type="number" name="qty" id="qty" value="{% if record %}{{ record.qty|safe }}{% endif %}" required>
                         </div>
                     </div>
 
                     <div class="row my-1">
                         <div class="col-4 col-lg-2">
-                            <label class="p-sm-2" for="klasifikasi" style="font-size: small;">Harga Satuan</label>
+                            <label class="p-sm-2" for="satuan" style="font-size: small;">Harga Satuan</label>
                         </div>
                         <div class="col-8 col-lg-10">
-                            <input class="form-control w-100" type="number" name="klasifikasi" id="satuan" value="{% if record %}{{ record.harga_satuan|safe }}{% endif %}" required>
+                            <input class="form-control w-100" type="number" name="satuan" id="satuan" value="{% if record %}{{ record.harga_satuan|safe }}{% endif %}" required>
                         </div>
                     </div>
 
                     <div class="row my-1">
                         <div class="col-4 col-lg-2">
-                            <label class="p-sm-2" for="klasifikasi" style="font-size: small;">Harga Total</label>
+                            <label class="p-sm-2" for="total" style="font-size: small;">Harga Total</label>
                         </div>
                         <div class="col-8 col-lg-10">
-                            <input class="form-control w-100" type="number" name="klasifikasi" id="total" value="{% if record %}{{ record.harga_total|safe }}{% endif %}" disabled>
+                            <input class="form-control w-100" type="number" name="total" id="total" value="{% if record %}{{ record.harga_total|safe }}{% endif %}" disabled>
                         </div>
                     </div>
 
@@ -108,4 +122,46 @@
 {% endblock %}
 
 <!-- Custom JS -->
-<!-- {% block custom_js %}{% endblock %} -->
+{% block custom_js %}
+<script>
+function deleteData(dataId) {
+    event.preventDefault();
+    // console.log(dataId);
+
+    // data = new FormData();
+    // data.set('csrfmiddlewaretoken', '{{ csrf_token }}');
+    // data.set('id',1);
+
+    // let request = new XMLHttpRequest();
+    // request.open("DELETE", '/pengeluaran_form', true);
+    // request.send(data)
+
+var details = {
+    'csrfmiddlewaretoken': '{{csrf_token}}',
+    'dataId': dataId,
+};
+
+var formBody = [];
+for (var property in details) {
+  var encodedKey = encodeURIComponent(property);
+  var encodedValue = encodeURIComponent(details[property]);
+  formBody.push(encodedKey + "=" + encodedValue);
+}
+formBody = formBody.join("&");
+
+fetch('/pengeluaran_form', {
+  method: 'DELETE',
+  headers: {
+    'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+    'X-CSRFToken': details['csrfmiddlewaretoken']
+  },
+  body: `{"dataId": ${details['dataId']}}`
+}).then(data_response => {
+    if (data_response.ok) {
+        window.location.replace("/pengeluaran?tahun={{ thisYear|safe }}&bulan={{ thisMonth|safe }}");
+    }
+});
+
+}
+</script>
+{% endblock %}

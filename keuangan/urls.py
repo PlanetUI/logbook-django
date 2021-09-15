@@ -1,8 +1,6 @@
 from django.urls import path
 # from .views import detail, dashboard, index, edit, delete, save
 
-from .views.index import index
-from .views.dashboard import dashboard
 from .views.detail import detail
 from .views.edit import edit, delete, save
 from .views.category import category
@@ -19,9 +17,6 @@ urlpatterns = [
     path('pengeluaran', pengeluaran),
     path('pengeluaran_form', pengeluaran_form),
     path('pemasukan', pemasukan),
-
-    path('home', index),
-    path('dashboard', dashboard),
     path('detail', detail),
     path('edit', edit),
     path('delete', delete),
