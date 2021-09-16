@@ -14,9 +14,17 @@
 <!-- Custom CSS -->
 {% block custom_css %}{% endblock %}
 
+<!-- Custom PreLoad -->
+{% block custom_preload_body %}
+{% if not user.is_authenticated %}
+    <script type="text/javascript">
+        window.location.href = "/login";
+    </script>
+{% endif %}
+{% endblock %}
+
 <!-- Body -->
 {% block custom_body %}
-    {% if user.is_authenticated %}
         <div class="container overflow-hidden">
             <div class="row gy-lg-3">
 
@@ -35,7 +43,6 @@
 
             </div>
         </div>
-    {% endif %}
 {% endblock %}
 
 <!-- Custom JS -->

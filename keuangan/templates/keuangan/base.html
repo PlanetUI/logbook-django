@@ -13,11 +13,18 @@
     {% block custom_css %}{% endblock %}
 </head>
 <body class="bg-light">
+    {% block custom_preload_body %}{% endblock %}
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
         <div class="container-fluid">
             <span class="navbar-brand" href="/"><a href="/" class="bi-columns-gap"></a>
-                {% block navbar_title_menu %}{% endblock %}
+                {% if user.is_authenticated %}
+                    {% block navbar_title_menu %}{% endblock %}
+                {% else %}
+                    <a href="/" class="px-3 text-decoration-none">
+                        ArusKas
+                    </a>
+                {% endif %}
             </span>
             
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -27,7 +34,9 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
     
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    {% block navbar_root_menu %}{% endblock %}
+                    {% if user.is_authenticated %}
+                        {% block navbar_root_menu %}{% endblock %}
+                    {% endif %}
                 </ul>
     
                 <div class="nav-item dropdown">
@@ -41,7 +50,7 @@
                         <li><a class="dropdown-item" href="{% url 'admin:logout' %}"><i class="bi-box-arrow-right"></i> Logout</a></li>
                     </ul>
                     {% else %}
-                    <a class="nav-link text-end" href="/admin">
+                    <a class="nav-link text-end" href="/login">
                         <i class="bi-lock"></i> Login
                     </a>
                     {% endif %}

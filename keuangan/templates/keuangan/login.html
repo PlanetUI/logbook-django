@@ -1,0 +1,50 @@
+{% extends "./base.html" %}
+
+<!-- Page Title -->
+{% block title %}
+    Login
+{% endblock %}
+
+{% block navbar_title_menu %}
+<a href="/dash" class="px-3 text-decoration-none">
+    Login
+</a>
+{% endblock %}
+
+<!-- Custom CSS -->
+<!-- {% block custom_css %}{% endblock %} -->
+
+<!-- Menu Root -->
+<!-- {% block navbar_root_menu %}{% endblock %} -->
+
+<!-- Body Navigation -->
+<!-- {% block body_navigation %}{% endblock %} -->
+
+<!-- Body -->
+{% block custom_body %}
+    <div class="container">
+        <div class="card mx-auto my-5" style="max-width: 300px;">
+            <div class="card-header text-center">
+                <span class="fw-bolder">Login</span>
+            </div>
+            <div class="card-body container">
+                <form class="mx-auto" action="/admin/login/?next=/" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="next" value="/">
+                    <label class="w-100 p-1" for="id_username">Username:</label>
+                    <input class="w-100 p-1" type="text" id="id_username" name="username" autocomplete="username" autofocus required>
+                    <label class="w-100 p-1" for="id_password">Password:</label>
+                    <input class="w-100 p-1" type="password" id="id_password" name="password" autocomplete="current-password" required>
+                    <button class="btn btn-primary w-100 p-1 mt-2" type="submit">Log in</button>
+                </form>
+            </div>
+            <div class="card-footer text-muted text-center small">
+                &copy; 2021 by <span class="fw-bolder">Mashanz</span>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
+
+<!-- Custom JS -->
+<!-- {% block custom_js %}{% endblock %} -->

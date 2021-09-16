@@ -12,6 +12,15 @@
 <!-- Custom CSS -->
 <!-- {% block custom_css %}{% endblock %} -->
 
+<!-- Custom PreLoad -->
+{% block custom_preload_body %}
+{% if not user.is_authenticated %}
+    <script type="text/javascript">
+        window.location.href = "/login";
+    </script>
+{% endif %}
+{% endblock %}
+
 <!-- Menu Root -->
 <!-- {% block root_menu %}{% endblock %} -->
 

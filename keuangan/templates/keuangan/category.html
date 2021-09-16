@@ -12,20 +12,19 @@
 {% endblock %}
 
 <!-- Custom CSS -->
-{% block custom_css %}
+<!-- {% block custom_css %}{% endblock %} -->
 
+<!-- Custom PreLoad -->
+{% block custom_preload_body %}
+{% if not user.is_authenticated %}
+    <script type="text/javascript">
+        window.location.href = "/login";
+    </script>
+{% endif %}
 {% endblock %}
 
 <!-- Menu Root -->
-{% block navbar_root_menu %}
-    <!-- <li class="nav-item">
-        <a class="nav-link active" aria-current="page" href="/pemasukan">Pemasukan</a>
-    </li>
-
-    <li class="nav-item">
-        <a class="nav-link active" aria-current="page" href="/pengeluaran">Pengeluaran</a>
-    </li> -->
-{% endblock %}
+<!-- {% block navbar_root_menu %}{% endblock %} -->
 
 <!-- Body Navigation -->
 {% block body_navigation %}
@@ -77,6 +76,4 @@
 {% endblock %}
 
 <!-- Custom JS -->
-{% block custom_js %}
-
-{% endblock %}
+<!-- {% block custom_js %}{% endblock %} -->
