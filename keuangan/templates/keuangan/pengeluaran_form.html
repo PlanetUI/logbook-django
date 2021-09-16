@@ -86,7 +86,7 @@
                             <label class="p-sm-2" for="qty" style="font-size: small;">Kuantitas</label>
                         </div>
                         <div class="col-8 col-lg-10">
-                            <input class="form-control" type="number" name="qty" id="qty" value="{% if record %}{{ record.qty|safe }}{% endif %}" required>
+                            <input oninput="do_calc()" class="form-control" type="number" name="qty" id="qty" value="{% if record %}{{ record.qty|safe }}{% else %}1{% endif %}" required>
                         </div>
                     </div>
 
@@ -95,7 +95,7 @@
                             <label class="p-sm-2" for="satuan" style="font-size: small;">Harga Satuan</label>
                         </div>
                         <div class="col-8 col-lg-10">
-                            <input class="form-control w-100" type="number" name="satuan" id="satuan" value="{% if record %}{{ record.harga_satuan|safe }}{% endif %}" required>
+                            <input oninput="do_calc()" class="form-control w-100" type="number" name="satuan" id="satuan" value="{% if record %}{{ record.harga_satuan|safe }}{% else %}0{% endif %}" required>
                         </div>
                     </div>
 
@@ -104,7 +104,7 @@
                             <label class="p-sm-2" for="total" style="font-size: small;">Harga Total</label>
                         </div>
                         <div class="col-8 col-lg-10">
-                            <input class="form-control w-100" type="number" name="total" id="total" value="{% if record %}{{ record.harga_total|safe }}{% endif %}" disabled>
+                            <input class="form-control w-100" type="number" name="total" id="total" value="{% if record %}{{ record.harga_total|safe }}{% else %}0{% endif %}" disabled>
                         </div>
                     </div>
 
@@ -124,43 +124,42 @@
 <!-- Custom JS -->
 {% block custom_js %}
 <script>
+    function do_calc() {
+        qty = document.getElementById('qty').value;
+        satuan = document.getElementById('satuan').value;
+        document.getElementById('total').value = qty * satuan;
+    }
+</script>
+
+<script>
 function deleteData(dataId) {
     event.preventDefault();
-    // console.log(dataId);
 
-    // data = new FormData();
-    // data.set('csrfmiddlewaretoken', '{{ csrf_token }}');
-    // data.set('id',1);
+    var details = {
+        'csrfmiddlewaretoken': '{{csrf_token}}',
+        'dataId': dataId,
+    };
 
-    // let request = new XMLHttpRequest();
-    // request.open("DELETE", '/pengeluaran_form', true);
-    // request.send(data)
-
-var details = {
-    'csrfmiddlewaretoken': '{{csrf_token}}',
-    'dataId': dataId,
-};
-
-var formBody = [];
-for (var property in details) {
-  var encodedKey = encodeURIComponent(property);
-  var encodedValue = encodeURIComponent(details[property]);
-  formBody.push(encodedKey + "=" + encodedValue);
-}
-formBody = formBody.join("&");
-
-fetch('/pengeluaran_form', {
-  method: 'DELETE',
-  headers: {
-    'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
-    'X-CSRFToken': details['csrfmiddlewaretoken']
-  },
-  body: `{"dataId": ${details['dataId']}}`
-}).then(data_response => {
-    if (data_response.ok) {
-        window.location.replace("/pengeluaran?tahun={{ thisYear|safe }}&bulan={{ thisMonth|safe }}");
+    var formBody = [];
+    for (var property in details) {
+    var encodedKey = encodeURIComponent(property);
+    var encodedValue = encodeURIComponent(details[property]);
+    formBody.push(encodedKey + "=" + encodedValue);
     }
-});
+    formBody = formBody.join("&");
+
+    fetch('/pengeluaran_form', {
+    method: 'DELETE',
+    headers: {
+        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+        'X-CSRFToken': details['csrfmiddlewaretoken']
+    },
+    body: `{"dataId": ${details['dataId']}}`
+    }).then(data_response => {
+        if (data_response.ok) {
+            window.location.replace("/pengeluaran?tahun={{ thisYear|safe }}&bulan={{ thisMonth|safe }}");
+        }
+    });
 
 }
 </script>
