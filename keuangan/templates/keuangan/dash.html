@@ -80,7 +80,7 @@
             </div>
         </div>
 
-        <div class="card m-1">
+        <div class="card m-1 d-none">
             <div class="card-header fw-bolder">
                 Pemasukan
             </div>
@@ -115,66 +115,63 @@
 <!-- Custom JS -->
 {% block custom_js %}
 
-<script>
-    const pengeluaranChartlabels = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
-    const pengeluaranChartdatas = {{ cashflowOutList }};
-    var pengeluaranChartctx = document.getElementById('pengeluaranChart').getContext('2d');
-    var pengeluaranChart = new Chart(pengeluaranChartctx, {
-        type: 'bar',
-        data: {
-            labels: pengeluaranChartlabels,
-            datasets: [{
-                label: `Pengeluaran Bulanan Tahun {{ thisYear|safe }}`,
-                data: pengeluaranChartdatas,
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                ],
-                borderWidth: 1,
-                borderRadius: 5,
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    });
-</script>
+{{ cashflowOutList|json_script:"cashflowOutList" }}
+{{ cashflowInList|json_script:"cashflowInList" }}
 
 <script>
-    const pemasukanChartlabels = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
-    const pemasukanChartdatas = {{ cashflowInList }};
-    var pemasukanChartctx = document.getElementById('pemasukanChart').getContext('2d');
-    var pemasukanChart = new Chart(pemasukanChartctx, {
-        type: 'bar',
-        data: {
-            labels: pemasukanChartlabels,
-            datasets: [{
-                label: `Pemasukan Bulanan Tahun {{ thisYear|safe }}`,
-                data: pemasukanChartdatas,
-                backgroundColor: [
-                    'rgba(75, 192, 192, 0.2)',
-                ],
-                borderColor: [
-                    'rgba(75, 192, 192, 1)',
-                ],
-                borderWidth: 1,
-                borderRadius: 5,
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
+const monthLabels = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+
+new Chart(document.getElementById('pengeluaranChart').getContext('2d'), {
+    type: 'bar',
+    data: {
+        labels: monthLabels,
+        datasets: [{
+            label: `Pengeluaran Bulanan Tahun {{ thisYear|safe }}`,
+            data: JSON.parse(document.getElementById('cashflowOutList').textContent),
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+            ],
+            borderWidth: 1,
+            borderRadius: 5,
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
             }
         }
-    });
+    }
+});
+
+new Chart(document.getElementById('pemasukanChart').getContext('2d'), {
+    type: 'bar',
+    data: {
+        labels: monthLabels,
+        datasets: [{
+            label: `Pemasukan Bulanan Tahun {{ thisYear|safe }}`,
+            data: JSON.parse(document.getElementById('cashflowInList').textContent),
+            backgroundColor: [
+                'rgba(75, 192, 192, 0.2)',
+            ],
+            borderColor: [
+                'rgba(75, 192, 192, 1)',
+            ],
+            borderWidth: 1,
+            borderRadius: 5,
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
 </script>
 
 {% endblock %}
