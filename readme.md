@@ -1,4 +1,6 @@
-# ArusKas
+![logbook](https://user-images.githubusercontent.com/9214059/138811707-abce8f65-4209-483a-a18a-e67ade70216a.png)
+
+# ArusKas LogBook
 Aplikasi pencatatan keuangan rumah tangga. Mempermudah analisis arus keuangan bulanan dan tahunan.
 
 ## Requirement
