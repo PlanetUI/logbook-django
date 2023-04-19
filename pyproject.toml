@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "logbook-django"
+version = "0.1.0"
+description = ""
+authors = ["Mashanz <mangatkk@gmail.com>"]
+readme = "README.md"
+packages = [{include = "logbook_django"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+Django = "3.2.16"
+django-environ = "0.4.5"
+django-cors-headers = "3.14.0"
+gunicorn = "20.1.0"
+ruff = "^0.0.261"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

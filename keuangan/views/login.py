@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 
 def login(request):
     html_template = 'keuangan/login.html'

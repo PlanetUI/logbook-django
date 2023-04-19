@@ -1,11 +1,12 @@
 from django.contrib import admin
-from django.contrib.admin import DateFieldListFilter
 
 # Register your models here.
 from .models import Product, CashFlow, CashFlowCategory
 
 class CashFlowAdmin(admin.ModelAdmin):
-    list_display = ['tanggal', 'kategory', 'produk', 'qty', 'harga_satuan', 'harga_total']
+    list_display = [
+        'tanggal', 'kategory', 'produk', 'qty', 'harga_satuan', 'harga_total'
+    ]
     search_fields = ['produk']
     list_filter = ['tanggal', 'kategory', 'produk']
 

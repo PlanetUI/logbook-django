@@ -17,6 +17,7 @@ env = environ.Env(
     # set casting, default value
     DEBUG=(bool, False),
     ALLOWED_HOSTS=(list, []),
+    SECRET_KEY=(str, 'secret'),
 )
 
 environ.Env.read_env()

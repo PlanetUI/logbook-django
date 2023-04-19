@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from datetime import datetime
 from ..models import CashFlow
 
@@ -7,7 +7,9 @@ def dash(request):
 
     getyear = int(request.GET.get('tahun', datetime.now().year))
 
-    cashflow = CashFlow.objects.all().order_by('-tanggal').filter(tanggal__year = getyear)
+    cashflow = CashFlow.objects.all().order_by('-tanggal').filter(
+        tanggal__year = getyear
+    )
     i = 1
     cashflowOutList = []
     cashflowInList = []

@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from datetime import datetime
 from ..models import CashFlow
 
@@ -21,7 +21,9 @@ def monthString(number=datetime.now().month):
     return data[number]
 
 def getCashFlow(tahun=datetime.now().year, bulan=datetime.now().month):
-    cashFlow = CashFlow.objects.all().order_by('-pk').filter(tanggal__year = tahun, tanggal__month = bulan)
+    cashFlow = CashFlow.objects.all().order_by('-pk').filter(
+        tanggal__year = tahun, tanggal__month = bulan
+    )
 
     total = 0
     list_kategori = []
@@ -89,6 +91,8 @@ def pengeluaran(request):
         'nextMonth': nextMonth,
         'getView': getView,
         'data': getCashFlow(getYear, getMonth),
-        'thisDate': f"{getYear}-{str(getMonth).zfill(2)}-{str(datetime.now().day).zfill(2)}"
+        'thisDate': (
+            f"{getYear}-{str(getMonth).zfill(2)}-{str(datetime.now().day).zfill(2)}"
+        )
     }
     return render(request, html_template, context)

@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse, JsonResponse
+from django.http import JsonResponse
 from datetime import datetime
 import json
 from ..models import CashFlow
-from ..models import CashFlowCategory, Product
+from ..models import CashFlowCategory
 from ..models import Product
 
 def pengeluaran_form_get(request):
@@ -27,7 +27,9 @@ def pengeluaran_form_get(request):
         'product': product,
         'thisYear': getYear,
         'thisMonth': getMonth,
-        'thisDate': f"{getYear}-{str(getMonth).zfill(2)}-{str(datetime.now().day).zfill(2)}"
+        'thisDate': (
+            f"{getYear}-{str(getMonth).zfill(2)}-{str(datetime.now().day).zfill(2)}"
+        )
     }
     return render(request, html_template, context)
 
@@ -43,13 +45,13 @@ def pengeluaran_form_post(request):
 
     try:
         obj_category = CashFlowCategory.objects.get(nama__exact=getKlasifikasi)
-    except:
+    except CashFlowCategory.DoesNotExist:
         obj_category = CashFlowCategory(nama=getKlasifikasi)
         obj_category.save()
 
     try:
         obj_product = Product.objects.get(nama__exact=getProduk)
-    except:
+    except Product.DoesNotExist:
         obj_product = Product(nama=getProduk)
         obj_product.save()
 
